@@ -1,11 +1,11 @@
-
-import 'package:bloc_practice/todo2/todo_bloc.dart';
-import 'package:bloc_practice/todo2/todo_screen.dart';
+import 'package:bloc_practice/CallApi/todo_api.dart';
+import 'package:bloc_practice/CallApi/todo_bloc.dart';
+import 'package:bloc_practice/CallApi/todo_event.dart';
+import 'package:bloc_practice/CallApi/todo_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-void main(){
+void main() {
   runApp(const MyApp());
 }
 
@@ -16,8 +16,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: BlocProvider(create: (_) => TodoBloc(),
-      child: TodoScreen(),
+      home: BlocProvider(
+        create: (context) => TodoBloc(TodoService())..add(FetchTodos()),
+        child: TodoScreen(),
       ),
     );
   }
